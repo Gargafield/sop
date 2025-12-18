@@ -12,12 +12,13 @@ const char *vertexShaderSource =
 "layout (location = 1) in vec3 inColor;"
 ""
 "uniform mat4 model;"
+"uniform mat4 projection;"
 ""
 "out vec3 outColor;"
 ""
 "void main()\n"
 "{\n"
-"   gl_Position = model * vec4(inPos, 1.0f);"
+"   gl_Position = projection * model * vec4(inPos, 1.0f);"
 "   outColor = inColor;"
 "}\0";
 
@@ -130,6 +131,9 @@ int main() {
     unsigned int modelLoc = glGetUniformLocation(shaderProgram, "model");
     unsigned int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     
+    glm::mat4 perspective = glm::frustum(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 10.0f);
+    glm::mat4 orthographic = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 10.0f);
+
     while(!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
@@ -137,22 +141,41 @@ int main() {
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
 
-        glm::mat4 projection = glm::identity<glm::mat4>();
-        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
         float time = (float)glfwGetTime();
         for (size_t i = 0; i < trianglePositions.size(); ++i) {
-            glm::mat4 transform = glm::mat4(1.0f);
             
-            transform = glm::translate(transform, trianglePositions[i]);
+            glm::mat4 projection;
+            switch (i) {
+                case 0:
+                    projection = perspective;
+                    break;
+                case 1:
+                    projection = glm::identity<glm::mat4>();
+                    break;
+                case 2:
+                    projection = orthographic;
+                    break;
+            }
+            glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
             
-            float angle = (time + (float)i) * glm::radians(60.0f);
-            transform = glm::rotate(transform, angle, glm::vec3(0.0f, 0.0f, 1.0f));
+            glm::mat4 transform = glm::identity<glm::mat4>();
             
-            float scaleAmount = sin(time + i) * 0.5f + 1.0f;
-            transform = glm::scale(transform, glm::vec3(scaleAmount, scaleAmount, scaleAmount));
+            if (i == 0 || i == 2) {
+                // oscellate along z-axis
+                float zdistance = sin(time) * 2.0f - 3.0f; // Move between -5 and -3
+                transform = glm::translate(transform, trianglePositions[i] + glm::vec3(0.0f, 0.0f, zdistance));
+            } else {
+                transform = glm::translate(transform, trianglePositions[i]);
+                float angle = (time + (float)i) * glm::radians(60.0f);
+                transform = glm::rotate(transform, angle, glm::vec3(0.0f, 0.0f, 1.0f));
+                
+                float scaleAmount = sin(time + i) * 0.5f + 1.0f;
+                transform = glm::scale(transform, glm::vec3(scaleAmount, scaleAmount, scaleAmount));
+            }
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));            
             
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
 
