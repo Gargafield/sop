@@ -1,0 +1,96 @@
+
+engine-history:
+  type: Article
+  title: Game engines and game history 
+  author: Lowood, Henry
+  date: 2014
+  page-range: 179-198
+  location: Stanford Libraries, Palo Alto
+  publisher: Kinephanos. Revue d'études des médias et de culture populaire
+  serial-number: "ISSN 1916-985X"
+
+engine-evolution:
+  type: Thesis
+  title: The architecture and evolution of computer game engines
+  author: Koirikivi, Rainer
+  date: 2015
+  location: University of Oulu, Oulu, Finland
+  url: https://urn.fi/URN:NBN:fi:oulu-201512112292
+
+doom-limitations:
+  type: Video
+  title: Doom engine - Limited but still 3D
+  date: 2021-05-13
+  author: borogk
+  url: https://www.youtube.com/watch?v=ZYGJQqhMN1U
+  publisher: YouTube
+
+enginge-architecture:
+  type: Book
+  title: Game engine architecture
+  date: 2018-05-29
+  author: Gregory, Jason
+  publisher: AK Peters/CRC Press
+  serial-number: "ISBN 978-1-138-03545-4 (hbk)"
+
+mat-a:
+  type: Book
+  title: MAT A htx
+  date: 2019
+  author:
+    - Jensen, Michael
+    - Marthinus, Klaus
+    - Hansen, Bernt
+  publisher: Systime
+  url: https://mathtxa.systime.dk/?id=1
+  serial-number: 9788761693617
+
+math-gamedev:
+  type: Book
+  title: "Foundation of Game Engine Development: Mathematics"
+  volume: 1
+  date: 2016
+  location: Lincoln, California, USA
+  author:
+    - Lengyel, Eric
+  publisher: Terathon Software LLC
+  serial-number: "ISBN-13: 979-8-9853582-0-9"
+
+
+math-enginedev:
+  type: Book
+  title: Mathematics for 3D Game Programming and Computer Graphics
+  date: 2012
+  edition: 3
+  location: Boston, Massachusetts, USA
+  author:
+    - Lengyel, Eric
+  publisher: Course Technology
+  serial-number: "ISBN-10: 1-4354-5886-9"
+
+
+au-algebra:
+  type: Web
+  title: Lineær Algebra
+  date: 2020-12-18
+  author: Jesper Funch Thomsen
+  url: { value: https://data.math.au.dk/interactive/linalg/2020/, date: 2025-12-18 }
+
+graphic-apis:
+  type: Video
+  title: The Chaotic State of GPU Programming
+  date: 2025-03-07
+  author: eisfrosch
+  url: https://www.youtube.com/watch?v=9-DiGrnz8l8
+  publisher: YouTube
+
+learn-opengl:
+  type: Book
+  title: "Learn OpenGL: Learn modern OpenGL graphics programming in a step-by-step fashion"
+  date: 2020
+  author:
+    - De Vries, Joey
+  publisher: Kendall & Wells
+  url: https://learnopengl.com/
+  serial-number: "ISBN: 978-90-90-33256-7"
+
